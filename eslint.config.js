@@ -8,7 +8,7 @@ module.exports = {
     'standard-with-typescript'
   ],
   overrides: [],
-  ignorePatterns: ['*.js', 'node_module'],
+  ignorePatterns: ['*.js', 'node_modules'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -17,6 +17,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react', '@typescript-eslint'],
   rules: {
+    // Other rules you already have
     indent: ['error', 2],
     'no-return-assign': 0,
     'arrow-body-style': 0,
@@ -34,6 +35,24 @@ module.exports = {
     '@typescript-eslint/no-confusing-void-expression': 0,
     '@typescript-eslint/no-misused-promises': 0,
     '@typescript-eslint/indent': 0,
-    '@typescript-eslint/no-non-null-assertion': 0
+    '@typescript-eslint/no-non-null-assertion': 0,
+
+    // New rules for variable declaration
+    'no-var': 'error', // disallow `var` keyword
+    'prefer-const': 'error', // prefer `const` where possible
+    'prefer-destructuring': [
+      'error',
+      {
+        VariableDeclarator: {
+          array: false,
+          object: true
+        },
+        AssignmentExpression: {
+          array: true,
+          object: true
+        }
+      }
+    ],
+    'no-unused-vars': 'warn' // warn about unused variables
   }
 };
