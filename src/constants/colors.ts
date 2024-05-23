@@ -21,6 +21,7 @@ export const darkGreen = '#357F2F';
 export const borderGrey2 = '#E6E6E6';
 export const textDark = '#020202';
 export const successBackground = ' #97D492';
+export const apppurple = '#724EAF';
 
 export const pallets = {
   shadowColor: 'rgba(0, 0, 0, 0.25)',

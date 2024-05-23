@@ -4,7 +4,8 @@ import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import React from 'react';
-import { Text } from './src/components';
+import { Button, Text } from './src/components';
+import { primaryTextColor, whiteText } from './src/constants';
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -28,7 +29,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text fontWeight='600'>
+      <Text fontWeight='400' style={{ fontSize: 14 }}>
         Open up App.tsx to start working on your app!
       </Text>
       <StatusBar style='auto' />

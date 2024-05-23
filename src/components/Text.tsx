@@ -1,5 +1,9 @@
 import React from 'react';
-import { Text as RNText, TextStyle } from 'react-native';
+import {
+  Text as RNText,
+  TextStyle,
+  TextProps as RNTextProps
+} from 'react-native';
 
 import { primaryTextColor } from '../constants/colors';
 
@@ -11,34 +15,37 @@ type FontFamily =
   | 'NeueMontreal-Medium'
   | 'NeueMontreal-Bold';
 
-export type TextPropTypes = {
+export type TextPropTypes = RNTextProps & {
   children?: string | React.ReactNode;
   fontWeight?: FontWeight;
-  style?: TextStyle; // Update TextProps to TextStyle for style
+  style?: TextStyle;
 };
 
-export const Text = ({
+const getFontFamily = (fontWeight: FontWeight): FontFamily => {
+  switch (fontWeight) {
+    case '300':
+      return 'NeueMontreal-Light';
+    case '400':
+      return 'NeueMontreal-Regular';
+    case '600':
+      return 'NeueMontreal-Medium';
+    case '700':
+      return 'NeueMontreal-Bold';
+    default:
+      return 'NeueMontreal-Regular';
+  }
+};
+
+const fontSize = 13;
+
+export const Text: React.FC<TextPropTypes> = ({
   children,
   style,
   fontWeight = '400',
   ...props
-}: TextPropTypes) => {
-  const getFontFamily = (fontWeight: FontWeight): FontFamily => {
-    switch (fontWeight) {
-      case '300':
-        return 'NeueMontreal-Light';
-      case '400':
-        return 'NeueMontreal-Regular';
-      case '600':
-        return 'NeueMontreal-Medium';
-      case '700':
-        return 'NeueMontreal-Bold';
-      default:
-        return 'NeueMontreal-Regular';
-    }
-  };
-
-  const fontSize = 13;
+}) => {
+  const computedFontSize = style?.fontSize ?? fontSize;
+  const lineHeight = computedFontSize * 1.5;
 
   return (
     <RNText
@@ -47,11 +54,11 @@ export const Text = ({
       style={[
         {
           color: primaryTextColor,
-          fontSize,
-          lineHeight: (style?.fontSize ?? fontSize) * 1.5
+          fontSize: computedFontSize,
+          lineHeight,
+          fontFamily: getFontFamily(fontWeight)
         },
-        { fontFamily: getFontFamily(fontWeight) },
-        style as TextStyle // Use type assertion to TextStyle
+        style as TextStyle
       ]}
       {...props}
     >
