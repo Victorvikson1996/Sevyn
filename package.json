@@ -6,10 +6,7 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "lint-check": "npx eslint .",
-    "lint-fix": "npx eslint . --fix",
-    "prepare": "husky install"
+    "web": "expo start --web"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
@@ -17,7 +14,10 @@
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
+    "eslint-config-love": "^48.0.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
     "expo": "~50.0.7",
+    "expo-dev-client": "~3.3.11",
     "expo-font": "~11.10.3",
     "expo-splash-screen": "~0.26.4",
     "expo-status-bar": "~1.11.1",
@@ -31,7 +31,6 @@
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
-    "@types/react-native": "^0.73.0",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "@typescript-eslint/parser": "^7.10.0",
     "eslint": "^9.3.0",

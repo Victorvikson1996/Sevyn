@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export const onBoardScreen = () => {
+export const OnBoardScreen = () => {
   return (
     <View>
-      <Text>onBoardScreen</Text>
+      <Text>OnBoardScreen</Text>
     </View>
   );
 };

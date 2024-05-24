@@ -1,11 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import { useFonts } from 'expo-font';
 import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import React from 'react';
-import { Button, Text } from './src/components';
-import { primaryTextColor, whiteText } from './src/constants';
+import { Text } from './src/components';
+import { AppNavigator, Navigation } from './src/navigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -28,12 +29,10 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text fontWeight='400' style={{ fontSize: 14 }}>
-        Open up App.tsx to start working on your app!
-      </Text>
-      <StatusBar style='auto' />
-    </View>
+    <SafeAreaProvider>
+      <StatusBar backgroundColor='#fff' barStyle='dark-content' />
+      <Navigation />
+    </SafeAreaProvider>
   );
 }
 
