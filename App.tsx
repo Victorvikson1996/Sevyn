@@ -29,7 +29,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider onLayout={onLayoutRootView}>
       <StatusBar backgroundColor='#fff' barStyle='dark-content' />
       <Navigation />
     </SafeAreaProvider>
