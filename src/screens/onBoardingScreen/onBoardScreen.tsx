@@ -28,7 +28,7 @@ const swiperItems: SwiperItem[] = [
     title: 'Budgets',
     subtitle: 'Made Easy',
     body: 'Take Control of Your finances.',
-    image: require('../../../src/assets/images/mancoin.jpg')
+    image: require('../../assets/images/wallet.jpg')
   },
   {
     title: 'Saving',
@@ -40,7 +40,7 @@ const swiperItems: SwiperItem[] = [
     title: 'Saving Goals',
     subtitle: 'Made Easy',
     body: 'Reach your Finiacial Goals Faster.',
-    image: require('../../assets/images/wallet.jpg')
+    image: require('../../../src/assets/images/mancoin.jpg')
   }
 ];
 
@@ -92,7 +92,7 @@ export const OnBoardScreen = ({ navigation }: SplashScreenProps) => {
       <View style={styles.bottom}>
         <Button
           text='Get Started'
-          onPress={() => navigation.navigate('Login')}
+          onPress={() => navigation.navigate('Signup')}
         />
         <View style={styles.indicators}>
           {[...Array(swiperItems.length)].map((e, i) => (
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   indicator: {
-    backgroundColor: lightGrey,
+    backgroundColor: apppurple,
     height: 3,
     width: 75,
     marginHorizontal: 2,
     borderRadius: 3
   },
   indicatorActive: {
-    backgroundColor: apppurple
+    backgroundColor: lightGrey
   },
   slide: {
     width: Dimensions.get('window').width,
