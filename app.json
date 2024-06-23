@@ -4,28 +4,25 @@
     "slug": "mysafe",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.akuchukwu.mysafe"
     },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": ["expo-font"],
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/NeueMontreal-Regular.otf",
+            "./src/assets/fonts/NeueMontreal-Light.otf",
+            "./src/assets/fonts/NeueMontreal-Medium.otf",
+            "./src/assets/fonts/NeueMontreal-Bold.otf"
+          ]
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "a7fb63be-d67c-43b7-a83f-15b824ffcf8e"

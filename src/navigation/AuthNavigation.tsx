@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native';
 import React from 'react';
 import { OnBoardScreen } from '../screens/onBoardingScreen';
 import { LoginScreen, SignUp } from '../screens/Auth';

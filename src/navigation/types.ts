@@ -5,6 +5,7 @@ export type AuthStackParamList = {
   Splash: undefined;
   Login: undefined;
   Signup: undefined;
+  MainApp: undefined;
 };
 
 export type MainTabParamList = {
