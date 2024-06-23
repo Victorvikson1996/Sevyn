@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   StyleSheet,
@@ -13,10 +13,17 @@ import {
   Text,
   Button,
   Input,
-  BackHeader
+  BackHeader,
+  Loader
 } from '../../components';
+// import SuccessModal, {
+//   type SuccessModalHandle
+// } from '../../components/SuccessModal';
+import SuccessModal, {
+  type SuccessModalHandle
+} from '../../components/Success';
 import { AuthNavigationProp } from '../../navigation/types';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAuth } from '../../apis/AuthContext';
 
 type LoginScreenProps = {
   navigation: AuthNavigationProp<'Login'>;
@@ -29,7 +36,8 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
     password?: string;
   }>({});
   const [loading, setLoading] = useState(false);
-
+  const { loginUser, user } = useAuth();
+  const ref = useRef<SuccessModalHandle>(null);
   const validate = () => {
     Keyboard.dismiss();
     let isValid = true;
@@ -50,7 +58,15 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
   };
 
   const login = async () => {
-    navigation.navigate('MainApp');
+    setLoading(true);
+    try {
+      await loginUser(inputs.phoneOrEmail, inputs.password);
+      Alert.alert('Login Successfull');
+      navigation.navigate('MainApp');
+    } catch (error) {
+      Alert.alert('Login Failed', 'Something went wrong');
+    }
+    setLoading(false);
   };
 
   const handleOnchange = (text: string, input: 'phoneOrEmail' | 'password') => {
@@ -115,6 +131,14 @@ export const LoginScreen = ({ navigation }: LoginScreenProps) => {
           </TouchableOpacity>
         </ScrollView>
       </View>
+      <SuccessModal
+        ref={ref}
+        title='Login Status'
+        btnText='Continue'
+        onPress={() => {
+          navigation.navigate('MainApp');
+        }}
+      />
     </ContentWrapper>
   );
 };

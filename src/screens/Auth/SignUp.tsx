@@ -14,7 +14,8 @@ import {
   Button,
   BackHeader,
   Input,
-  Checkbox
+  Checkbox,
+  Loader
 } from '../../components';
 import {
   apppurple,
@@ -28,6 +29,7 @@ import SuccessModal, {
   type SuccessModalHandle
 } from '../../components/SuccesModal';
 import { AuthNavigationProp } from '../../navigation/types';
+import { useAuth } from '../../apis/AuthContext';
 
 interface Inputs {
   phone: string;
@@ -50,6 +52,7 @@ type SignUpScreenProps = {
 };
 
 export const SignUp = ({ navigation }: SignUpScreenProps) => {
+  const { signUpUser } = useAuth();
   const [inputs, setInputs] = useState<Inputs>({
     email: '',
     lastname: '',
@@ -102,8 +105,22 @@ export const SignUp = ({ navigation }: SignUpScreenProps) => {
     }
   };
 
-  const register = () => {
-    navigation.navigate('Login');
+  const register = async () => {
+    setLoading(true);
+    try {
+      await signUpUser(
+        inputs.email,
+        inputs.password,
+        inputs.firstname,
+        inputs.lastname,
+        inputs.phone
+      );
+      Alert.alert('Success', 'Please verify your email');
+      navigation.navigate('Login');
+    } catch (error) {
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+    }
+    setLoading(false);
   };
 
   const handleOnchange = (text: string, input: keyof Inputs) => {
@@ -225,13 +242,13 @@ export const SignUp = ({ navigation }: SignUpScreenProps) => {
       </View>
       <SuccessModal
         onPress={() => {
-          console.log('Hello');
+          navigation.navigate('Login');
         }}
         ref={ref}
-        title='Please check your sms'
-        btnText='Continue'
+        title='Registration Successful'
+        btnText='Continuew'
         subtitle={hiddenPhone}
-        btnColor={primaryBlue}
+        btnColor={apppurple}
       />
     </ContentWrapper>
   );

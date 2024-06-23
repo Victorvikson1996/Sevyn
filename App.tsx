@@ -5,10 +5,13 @@ import { useCallback } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
-import { AppNavigator, Navigation } from './src/navigation';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Navigation } from './src/navigation';
+import { AuthProvider } from './src/apis/AuthContext';
 
 SplashScreen.preventAutoHideAsync();
+
+const queryClient = new QueryClient();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -33,10 +36,14 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider onLayout={onLayoutRootView}>
-      <StatusBar backgroundColor='#fff' barStyle='dark-content' />
-      <Navigation />
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <SafeAreaProvider onLayout={onLayoutRootView}>
+          <StatusBar backgroundColor='#fff' barStyle='dark-content' />
+          <Navigation />
+        </SafeAreaProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 
